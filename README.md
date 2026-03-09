@@ -1,150 +1,118 @@
-# Projeto Full-Stack com Next.js e PostgreSQL
+# Template SaaS
 
-Este projeto demonstra uma aplicação web full-stack construída com Next.js, utilizando um banco de dados PostgreSQL para persistência de dados. Ele é configurado para ser executado em um ambiente de desenvolvimento local com Docker, incluindo um sistema de migrações de banco de dados e testes de integração.
+Um acelerador de desenvolvimento de Software as a Service (SaaS) projetado para economizar mais de **60 horas de setup inicial**. Este template fornece uma base sólida, segura e escalável, entregando uma arquitetura **MVC** com foco em **API First**, garantindo que o backend seja robusto e pronto para integração com qualquer interface ou serviço externo. Isso permite focar no que realmente importa: as regras de negócio.
 
-## Visão Geral
+## Principais Funcionalidades
 
-O objetivo deste projeto é servir como um guia prático para configurar um ambiente de desenvolvimento robusto, mostrando passo a passo como diferentes tecnologias se integram para criar uma aplicação funcional.
+### Core & Arquitetura
 
----
+- **Arquitetura MVC & API-First:** Separação clara de responsabilidades, facilitando a manutenção e escalabilidade.
+- **Tratamento de Erros Customizado:** Respostas de erro padronizadas e previsíveis em toda a aplicação.
+- **Banco de Dados:** Integração robusta com PostgreSQL via `pg` e gerenciamento de schema com `node-pg-migrate`.
+- **Dockerizado:** Ambiente de desenvolvimento isolado e padronizado usando Docker Compose.
+
+### Segurança & Usuários
+
+- **CRUD de Usuários:** Gerenciamento completo da entidade de usuário.
+- **Criptografia:** Senhas protegidas utilizando `bcryptjs`.
+- **Sessões & Cookies:** Gerenciamento seguro de estado de autenticação (`cookie`, `set-cookie-parser`).
+- **Autorização:** Sistema de Autorização avançado (RBAC/Permissões).(Em Desenvolvimento)
+- **Páginas:** Páginas de Cadastro e Login. (Em Desenvolvimento)
+
+### Qualidade de Código & Testes
+
+- **Testes Automatizados:** Configuração robusta com **Jest** para testes de integração e unidade (rodando em paralelo com a aplicação no modo watch).
+- **Linting & Formatting:** ESLint e Prettier já configurados para manter o padrão do código.
 
 ## Tecnologias Utilizadas
 
-- **Frontend:** [Next.js](https://nextjs.org/) (com React)
-- **Backend (API):** [Next.js API Routes](https://nextjs.org/docs/api-routes/introduction)
-- **Banco de Dados:** [PostgreSQL](https://www.postgresql.org/)
-- **Orquestração de Serviços:** [Docker Compose](https://docs.docker.com/compose/)
-- **Migrações de Banco de Dados:** [node-pg-migrate](https://github.com/salsita/node-pg-migrate)
-- **Testes:** [Jest](https://jestjs.io/)
+- **Framework:** Next.js (v16+) & React (v19+)
+- **Linguagem/Ambiente:** Node.js
+- **Banco de Dados:** PostgreSQL
+- **Testes:** Jest, Faker.js
+- **Infra/DevOps:** Docker, Docker Compose
+- **Ferramentas:** SWR, Nodemailer, UUID, Async-Retry
+
+## CI/CD (GitHub Actions)
+
+O projeto já conta com workflows automatizados para garantir a estabilidade do código em cada Pull Request:
+
+- **Automated Tests:** Execução automática da suite de testes com **Jest** em ambiente Ubuntu.
+- **Linting:** Verificação de padrões de código e boas práticas (**ESLint/Prettier**).
 
 ---
 
-## Estrutura de Pastas
+## Roadmap
 
-Aqui está uma visão geral das pastas e arquivos mais importantes do projeto:
+- [x] Estrutura Base MVC & API First.
+- [x] Migrations & Schema PostgreSQL.
+- [x] Autenticação (Session/Cookies/Bcrypt).
+- [x] Testes de Integração.
+- [ ] Sistema de Autorização por Roles. (Em Desenvolvimento)
+- [ ] Interface de Login e Cadastro. (Em Desenvolvimento)
 
-```
-/
-├── infra/
-│   ├── compose.yaml          # Define os serviços Docker (PostgreSQL)
-│   ├── database.js           # Módulo de conexão com o banco de dados
-│   └── migrations/           # Arquivos de migração do banco de dados
-│   └── scripts/
-│       └── wait-for-postgres.js # Script para aguardar o BD iniciar
-│
-├── pages/
-│   ├── index.js              # Página inicial da aplicação (frontend)
-│   └── api/
-│       └── v1/
-│           ├── status/       # Endpoint que verifica o status do BD
-│           └── migrations/   # Endpoints para executar migrações via API
-│
-├── tests/
-│   └── integration/          # Testes de integração para a API
-│
-├── .env.development          # Arquivo de variáveis de ambiente (local)
-├── package.json              # Dependências e scripts do projeto
-└── README.md                 # Este arquivo
-```
+## Valor para o Negócio (Value Proposition)
+
+1.  **Time-to-Market:** Redução drástica no tempo de desenvolvimento inicial.
+2.  **Segurança por Design:** Boas práticas de segurança em autenticação e armazenamento de dados desde o primeiro commit.
+3.  **Escalabilidade:** Estrutura preparada para crescer, com banco de dados versionado e código altamente testável.
 
 ---
 
-## Passo a Passo: Executando o Projeto Localmente
-
-Siga os passos abaixo para configurar e executar a aplicação em seu ambiente de desenvolvimento.
+## Como utilizar
 
 ### Pré-requisitos
 
-Antes de começar, você precisa ter as seguintes ferramentas instaladas:
+- Node.js instalado
 
-- [Node.js](https://nodejs.org/) (v18 ou superior)
-- [Docker](https://www.docker.com/products/docker-desktop/)
-- **Para usuários Windows:** [WSL (Windows Subsystem for Linux)](https://docs.microsoft.com/pt-br/windows/wsl/install)
+### Instalação
 
-### 1. Clone o Repositório
+1. Clone o repositório:
 
-```bash
-git clone <URL_DO_SEU_REPOSITORIO>
-cd <NOME_DO_PROJETO>
-```
+   ```bash
+   git clone https://github.com/goncalvescrs/template-saas.git
+   ```
 
-### 2. Instale as Dependências
-
-Este comando irá instalar todas as dependências listadas no `package.json`.
+2. Instale as dependências:
 
 ```bash
-npm install
+  npm install
 ```
 
-### 3. Configure as Variáveis de Ambiente
+3. Configure as variáveis de ambiente:
+   Crie um arquivo `.env.development` na raiz do projeto baseado no `.env.example`.
 
-Crie uma cópia do arquivo `.env.development` (se ele não existir) e preencha com as credenciais do seu banco de dados. Estas são as mesmas variáveis usadas pelo `docker-compose` para inicializar o contêiner do PostgreSQL.
-
-**Arquivo: `.env.development`**
-
-```env
-# Configurações do PostgreSQL
-POSTGRES_HOST=localhost
-POSTGRES_PORT=5432
-POSTGRES_USER=localuser
-POSTGRES_PASSWORD=localpassword
-POSTGRES_DB=localdb
-
-# URL de conexão para as migrações e aplicação
-DATABASE_URL="postgres://localuser:localpassword@localhost:5432/localdb?ssl=false"
-```
-
-### 4. Inicie a Aplicação Completa
-
-O comando `dev` foi configurado para orquestrar todas as etapas necessárias para iniciar o ambiente de desenvolvimento.
+4. Inicie o ambiente de desenvolvimento:
+   Este comando (configurado via scripts do NPM) irá subir os containers Docker (Postgres), aguardar o banco estar pronto, rodar as migrations e iniciar o Next.js:
 
 ```bash
 npm run dev
 ```
 
-Este comando executa a seguinte sequência de tarefas:
+5. Rodando os Testes:
+   Para rodar a suíte de testes (com o banco de dados de teste subindo automaticamente):
 
-1.  **`services:up`**: Inicia o contêiner do PostgreSQL em segundo plano usando Docker Compose.
-2.  **`wait-for-postgres`**: Executa um script que aguarda o banco de dados ficar pronto para aceitar conexões.
-3.  **`migration:up`**: Aplica todas as migrações pendentes na pasta `infra/migrations`, garantindo que o schema do banco de dados esteja atualizado.
-4.  **`next dev`**: Inicia o servidor de desenvolvimento do Next.js.
+```bash
+npm run test
+```
 
-Após a execução, a aplicação estará disponível em `http://localhost:3000`.
+Para rodar os testes em modo watch (desenvolvimento contínuo): `npm run test:watch`
+
+### Scripts Disponíveis (package.json)
+
+- `npm run dev`: Sobe os serviços locais, roda as migrations e inicia o servidor Next.js.
+- `npm run test`: Executa os testes automatizados com o Jest rodando em paralelo com a aplicação.
+- `npm run test:watch`: Roda os testes observando as mudanças nos arquivos.
+- `npm run services:up`: Inicia os containers do Docker Compose em background.
+- `npm run services:stop`: Para os containers do Docker.
+- `npm run services:down`: Derruba os containers e remove as redes criadas.
+- `npm run migrations:create`: Cria um novo arquivo de migration em infra/migrations.
+- `npm run migrations:up`: Aplica as migrations pendentes no banco de dados de desenvolvimento.
+- `npm run lint:prettier:check`: Verifica a formatação do código.
+- `npm run lint:eslint:check`: Verifica os padrões do código com ESLint.
 
 ---
 
-## Scripts Disponíveis
+## Licença
 
-- **`npm run dev`**: Inicia o ambiente completo de desenvolvimento.
-- **`npm run services:up`**: Inicia apenas os serviços do Docker (banco de dados).
-- **`npm run services:down`**: Para e remove os contêineres Docker.
-- **`npm test`**: Executa os testes de integração. Este comando também sobe um ambiente limpo para garantir que os testes sejam consistentes.
-- **`npm run migration:create -- <nome-da-migracao>`**: Cria um novo arquivo de migração.
-- **`npm run migration:up`**: Aplica as migrações pendentes.
-
----
-
-## Entendendo a API
-
-### Endpoint de Status
-
-Para verificar se a API está funcionando e conectada ao banco de dados, acesse o seguinte endpoint no seu navegador ou via `curl`:
-
-**GET `/api/v1/status`**
-
-- **URL:** `http://localhost:3000/api/v1/status`
-- **Descrição:** Retorna informações sobre o estado do banco de dados, como a versão do PostgreSQL, o número máximo de conexões e o número de conexões ativas.
-- **Exemplo de Resposta:**
-  ```json
-  {
-    "updated_at": "2024-05-21T18:47:33.192Z",
-    "dependencies": {
-      "database": {
-        "version": "16.1",
-        "max_connections": 100,
-        "opned_connections": 1
-      }
-    }
-  }
-  ```
-  Este endpoint é um ótimo exemplo de como o Next.js pode servir tanto o frontend quanto o backend, acessando o banco de dados diretamente através de uma rota de API.
+Este projeto está sob a licença **MIT**.
