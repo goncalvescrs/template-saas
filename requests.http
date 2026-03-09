@@ -1,79 +1,51 @@
-@hostProduction = https://tab.cristianog.site
+@hostProduction = https://templatesaas.cristianog.site
 @hostPreview = https://cursodev-git-sessions-goncalvescrs-projects.vercel.app
 @localhost = http://localhost:3000
 
+@username = goncalvescrs
+@name = "goncalvescrs"
+@email = "goncalvescrs@email.com"
+
+### ----------------------------------------------------
+
+GET {{hostProduction}}/api/v1/migrations  
+
 ###
 
-GET {{hostProduction}}/api/v1/users/GONCALVESCRs
+POST {{hostProduction}}/api/v1/migrations  
 
-###
-
-GET {{hostPreview}}/api/v1/migrations  
-
-###
+### ---------------------------------------------------
 
 POST {{hostProduction}}/api/v1/users
 Content-Type: application/json
 
 {
-  "username": "cristiano03",
-  "email": "cristiano03@email.com",
-  "password": "cristiano02senha"
+  "username": {{name}},
+  "email": {{email}},
+  "password": "senhaboa"
 }
 
 ###
 
-PATCH {{hostPreview}}/api/v1/users/goncalvescrs
+GET {{hostProduction}}/api/v1/users/{{username}}
+
+### 
+
+PATCH {{hostProduction}}/api/v1/users/{{username}}
 Content-Type: application/json
 
 {
   "password": "senhacomhash"
 }
 
-### -------------------------------------------------
-
-POST {{hostPreview}}/api/v1/migrations  
-
-###
-
-POST {{hostPreview}}/api/v1/users HTTP/1.1
-Content-Type: application/json
-
-{
-  "username": "cookie",
-  "email": "cookie@gmail.com",
-  "password": "cookie123"
-}
-### 
-
-POST {{hostPreview}}/api/v1/sessions HTTP/1.1
-Content-Type: application/json
-
-{
-  "email": "cookie@gmail.com",
-  "password": "cookie123"
-}
-
-### --------------------------------------------
-
-POST {{hostProduction}}/api/v1/migrations  
-
-###
-
-POST {{hostProduction}}/api/v1/users HTTP/1.1
-Content-Type: application/json
-
-{
-  "username": "cookie",
-  "email": "cookie@gmail.com",
-  "password": "cookie123"
-}
-### 
+### ----------------------------------------
 
 POST {{hostProduction}}/api/v1/sessions HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "cookie@gmail.com",
-  "password": "cookie123"
+  "email": {{email}},
+  "password": "senhacomhash"
 }
+
+### -------------------------------------------------
