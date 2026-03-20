@@ -1,0 +1,14 @@
+'Cmd/Ctrl+Enter' // Triggers `Todo: Toggle Box`
+'Alt+Enter' // Triggers `Todo: Toggle Box`
+'Alt+D' // Triggers `Todo: Toggle Done`
+'Alt+C' // Triggers `Todo: Toggle Cancelled`
+'Alt+S' // Triggers `Todo: Toggle Start`
+'Cmd/Ctrl+Shift+A' // Triggers  `Todo: Archive`
+
+Paginas: 
+  ☐ Pagina de login basica - funcionalidade
+  ☐ estilização pagina de login
+  ☐ Pagina de cadastro basica - funcionalidade
+  ☐ estilização pagina de cadastro
+  ☐ pagina principal esplicando o template
+
